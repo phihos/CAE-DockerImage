@@ -1,5 +1,5 @@
 #FROM mhart/alpine-node
-FROM java:openjdk-8u111-jdk
+FROM openjdk:8-jdk-stretch
 LABEL maintainer "jonas.koenning@rwth-aachen.de"
 
 # Java Version and other ENV
@@ -22,7 +22,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y --no-install-recommends supervisor screen nodejs python g++ git ant maven make bash
 
 RUN npm install -g http-server bower grunt-cli grunt
@@ -65,8 +65,7 @@ RUN cd / && \
 	wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war && \
 	mkdir /root/.jenkins && \
 	touch /root/.jenkins/jenkins.install.InstallUtil.lastExecVersion && \
-	echo "2.0" >> /root/.jenkins/jenkins.install.InstallUtil.lastExecVersion && \
-	cp /opt/jenkins/configs/config.xml /root/.jenkins/
+	echo "2.0" >> /root/.jenkins/jenkins.install.InstallUtil.lastExecVersion
 
 ######### ROLE ##########
 #RUN mkdir source && \
